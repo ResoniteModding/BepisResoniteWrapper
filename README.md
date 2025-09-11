@@ -12,7 +12,20 @@ A [Resonite](https://resonite.com/) BepInEx library (not a standalone mod) that 
 
 ## Usage
 
-Add a reference to `BepisResoniteHooks` in your mod project, then subscribe to the events you need:
+First, add the package reference to your mod's `.csproj` file:
+
+```xml
+<PackageReference Include="ResoniteModding.BepisResoniteHooks" Version="1.0.*" />
+```
+
+Also add it as a dependency in your `thunderstore.toml`:
+
+```toml
+[package.dependencies]
+ResoniteModding-BepisResoniteHooks = "1.0.0"
+```
+
+Then subscribe to the events you need in your mod:
 
 ```csharp
 using BepisResoniteHooks;
