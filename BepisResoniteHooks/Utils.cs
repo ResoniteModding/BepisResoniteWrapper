@@ -1,10 +1,10 @@
-using BepInEx.Logging;
+using HarmonyLib;
 
 namespace BepisResoniteHooks;
 
-public static class Utils
+internal static class Utils
 {
-    public static void SafeInvokeAll<T>(this Action<T>? evt, T arg)
+    public static void SafeInvokeAll(this Action? evt)
     {
         if (evt == null) return;
 
@@ -12,12 +12,23 @@ public static class Utils
         {
             try
             {
-                ((Action<T>)handler)(arg);
+                ((Action)handler).Invoke();
             }
             catch (Exception ex)
             {
-                ResoniteHooks.Log.LogError($"Exception in {evt.GetType().Name} subscriber {handler.Method.DeclaringType?.FullName}.{handler.Method.Name}: {ex}");
+                Plugin.Log.LogError($"Exception in {evt.GetType().Name} subscriber {handler.Method.DeclaringType?.FullName}.{handler.Method.Name}: {ex}");
             }
+        }
+    }
+    public static void SafePatchCategory(this Harmony instance, string CategoryName)
+    {
+        try
+        {
+            instance.PatchCategory(CategoryName);
+        }
+        catch (Exception e)
+        {
+            Plugin.Log.LogError($"Failed to patch {CategoryName}. it's hook will not fire");
         }
     }
 }
