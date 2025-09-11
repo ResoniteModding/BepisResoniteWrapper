@@ -25,11 +25,6 @@ outdir = "./build"
 source = "./BepisResoniteHooks/bin/Release/BepisResoniteHooks.dll"
 target = "plugins/BepisResoniteHooks/"
 
-# Include the PDB file for better debugging support
-[[build.copy]]
-source = "./BepisResoniteHooks/bin/Release/BepisResoniteHooks.pdb"
-target = "plugins/BepisResoniteHooks/"
-
 # Uncomment the following lines to include CHANGELOG file in your mod package. https://wiki.thunderstore.io/mods/updating-a-package#changelog
 # [[build.copy]]
 # source = "./CHANGELOG.md"

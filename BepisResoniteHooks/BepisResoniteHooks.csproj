@@ -4,7 +4,9 @@
     <Version>1.0.0</Version>
     <Authors>ResoniteModding</Authors>
     <TargetFramework>net9.0</TargetFramework>
+    <PackageProjectUrl>https://github.com/ResoniteModding/BepisResoniteHooks</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ResoniteModding/BepisResoniteHooks</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
     <PackageId>ResoniteModding.BepisResoniteHooks</PackageId>
     <Product>BepisResoniteHooks</Product>
     <RootNamespace>BepisResoniteHooks</RootNamespace>
@@ -14,6 +16,9 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <CopyToPlugins>false</CopyToPlugins>
     <ThunderstorePackable>true</ThunderstorePackable>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <DebugType>embedded</DebugType>
     <GamePath Condition="'$(ResonitePath)' != ''">$(ResonitePath)/</GamePath>
     <GamePath Condition="Exists('$(MSBuildProgramFiles32)\Steam\steamapps\common\Resonite\')">$(MSBuildProgramFiles32)\Steam\steamapps\common\Resonite\</GamePath>
     <GamePath Condition="Exists('$(HOME)/.steam/steam/steamapps/common/Resonite/')">$(HOME)/.steam/steam/steamapps/common/Resonite/</GamePath>
@@ -25,6 +30,7 @@
 
   <!-- Modding dependencies -->
   <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
     <PackageReference Include="BepInEx.NET.CoreCLR" Version="6.0.0-be.*" IncludeAssets="compile" />
     <PackageReference Include="BepInEx.ResonitePluginInfoProps" Version="3.*" />
     <PackageReference Include="ResoniteModding.BepInExResoniteShim" Version="0.8.*" />
@@ -61,4 +67,8 @@
     <Copy SourceFiles="@(PluginFiles)" DestinationFolder="$(PluginTargetDir)" Condition="'$(CopyToPlugins)' == 'true'" />
     <Message Text="Copied plugin files to $(PluginTargetDir)" Importance="high" Condition="'$(CopyToPlugins)' == 'true'" />
   </Target>
+
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
 </Project>
