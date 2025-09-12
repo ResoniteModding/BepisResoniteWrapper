@@ -10,22 +10,26 @@ A [Resonite](https://resonite.com/) BepInEx library (not a standalone mod) that 
    - **Default location:** `C:\Program Files (x86)\Steam\steamapps\common\Resonite\BepInEx\`
 4. Start the game. If you want to verify that the mod is working you can check your BepInEx logs.
 
-## Usage
+## Usage for Developers
 
-First, add the package reference to your mod's `.csproj` file:
+### Adding BepisResoniteWrapper to Your Mod
+
+1. Add the NuGet package reference to your mod's `.csproj` file:
 
 ```xml
 <PackageReference Include="ResoniteModding.BepisResoniteWrapper" Version="1.0.*" />
 ```
 
-Also add it as a dependency in your `thunderstore.toml`:
+2. Add it as a dependency in your `thunderstore.toml`:
 
 ```toml
 [package.dependencies]
 ResoniteModding-BepisResoniteWrapper = "1.0.0"
 ```
 
-Then subscribe to the events you need in your mod:
+### Using the Events
+
+Subscribe to events in your BepInEx plugin:
 
 ```csharp
 using BepisResoniteWrapper;
@@ -34,24 +38,32 @@ public class MyMod : BasePlugin
 {
     public override void Load()
     {
+        // Subscribe to the OnEngineReady event
         ResoniteHooks.OnEngineReady += OnEngineReady;
     }
     
-    private void OnEngineReady(Engine engine)
+    private void OnEngineReady()
     {
-        // Your code here - engine is fully initialized
+        // The Resonite engine is now fully initialized
+        // Safe to access FrooxEngine classes and functionality
+        Log.LogInfo("Engine is ready!");
     }
 }
 ```
 
 ## Available Events
 
-- **`OnEngineReady`** - Fired when the Resonite engine has finished initialization and is ready for use
+- **`OnEngineReady`** - Fired when the Resonite engine has finished.
+  - No parameters - the engine instance can be accessed via `Engine.Current`
 
 ## For Library Contributors
 
-This library is designed to be extended with additional hooks and events as needed by the community. To add new hooks:
+To add new hooks to this library:
 
-1. Create a new hook class in the `Hooks/` folder
-2. Add the corresponding event to the `ResoniteHooks` class
-3. Follow the existing pattern used in `EngineReadyHook.cs`
+1. Create a new hook class in the `BepisResoniteWrapper/Hooks/` folder
+2. Add the corresponding event to the `ResoniteHooks` class in `Api.cs`
+3. Follow the pattern used in `EngineReadyHook.cs`:
+   - Use `[HarmonyPatchCategory]` attribute for organization
+   - Use `[HarmonyPatch]` to target the method to hook
+   - Implement Prefix/Postfix methods as needed
+   - Call the appropriate event from `ResoniteHooks`
