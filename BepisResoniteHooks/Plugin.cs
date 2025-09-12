@@ -15,11 +15,11 @@ class Plugin : BasePlugin
     public override void Load()
     {
         Log = base.Log;
-        runPatches();
+        RunPatches();
         Log.LogInfo($"Plugin {PluginMetadata.GUID} is loaded!");
     }
 
-    void runPatches()
+    void RunPatches()
     {
         HarmonyInstance.SafePatchCategory(nameof(EngineReadyHook));
     }

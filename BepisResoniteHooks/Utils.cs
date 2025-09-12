@@ -28,7 +28,7 @@ internal static class Utils
         }
         catch (Exception e)
         {
-            Plugin.Log.LogError($"Failed to patch {CategoryName}. it's hook will not fire");
+            Plugin.Log.LogError($"Failed to patch {CategoryName}. it's hook will not fire: {e}");
         }
     }
 }
