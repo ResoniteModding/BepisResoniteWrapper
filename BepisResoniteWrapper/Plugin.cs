@@ -2,9 +2,9 @@ using BepInEx;
 using BepInEx.Logging;
 using BepInEx.NET.Common;
 using BepInExResoniteShim;
-using BepisResoniteHooks.Hooks;
+using BepisResoniteWrapper.Hooks;
 
-namespace BepisResoniteHooks;
+namespace BepisResoniteWrapper;
 
 [ResonitePlugin(PluginMetadata.GUID, PluginMetadata.NAME, PluginMetadata.VERSION, PluginMetadata.AUTHORS, PluginMetadata.REPOSITORY_URL)]
 [BepInDependency(BepInExResoniteShim.PluginMetadata.GUID, BepInDependency.DependencyFlags.HardDependency)]

@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace BepisResoniteHooks;
+namespace BepisResoniteWrapper;
 
 internal static class Utils
 {

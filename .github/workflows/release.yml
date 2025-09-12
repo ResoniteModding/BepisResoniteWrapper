@@ -30,7 +30,7 @@ jobs:
                     echo "sha_short=$SHA_SHORT" >> $GITHUB_OUTPUT
                     
                     # Extract version from csproj
-                    VERSION=$(grep -oP '(?<=<Version>)[^<]+' BepisResoniteHooks/BepisResoniteHooks.csproj)
+                    VERSION=$(grep -oP '(?<=<Version>)[^<]+' BepisResoniteWrapper/BepisResoniteWrapper.csproj)
                     echo "version=$VERSION" >> $GITHUB_OUTPUT
                     echo "Version found: $VERSION"
             -   uses: actions/setup-dotnet@v4
@@ -41,7 +41,7 @@ jobs:
                     dotnet build -c Release
                     dotnet pack -c Release --no-build -o ./bin/dist
                     # Copy the built DLL to dist folder for release
-                    cp ./BepisResoniteHooks/bin/Release/BepisResoniteHooks.dll ./bin/dist/
+                    cp ./BepisResoniteWrapper/bin/Release/BepisResoniteWrapper.dll ./bin/dist/
             -   name: Create Thunderstore Package
                 run: |
                     dotnet tool restore

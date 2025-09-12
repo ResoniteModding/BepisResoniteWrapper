@@ -22,7 +22,7 @@ jobs:
                     echo "sha_short=$SHA_SHORT" >> $GITHUB_OUTPUT
                     
                     # Extract version from csproj
-                    VERSION=$(grep -oP '(?<=<Version>)[^<]+' BepisResoniteHooks/BepisResoniteHooks.csproj)
+                    VERSION=$(grep -oP '(?<=<Version>)[^<]+' BepisResoniteWrapper/BepisResoniteWrapper.csproj)
                     echo "version=$VERSION" >> $GITHUB_OUTPUT
                     echo "Version found: $VERSION"
             -   uses: actions/setup-dotnet@v4
@@ -33,11 +33,11 @@ jobs:
                     dotnet build -c Release
                     dotnet pack -c Release --no-build -o ./bin/dist
                     # Copy the built DLL to dist folder
-                    cp ./BepisResoniteHooks/bin/Release/BepisResoniteHooks.dll ./bin/dist/
+                    cp ./BepisResoniteWrapper/bin/Release/BepisResoniteWrapper.dll ./bin/dist/
             -   name: Upload artifacts
                 uses: actions/upload-artifact@v4
                 with:
-                    name: BepisResoniteHooks-${{ steps.info.outputs.version }}-${{ steps.info.outputs.sha_short }}
+                    name: BepisResoniteWrapper-${{ steps.info.outputs.version }}-${{ steps.info.outputs.sha_short }}
                     path: |
                         ./bin/dist/*.nupkg
                         ./bin/dist/*.dll

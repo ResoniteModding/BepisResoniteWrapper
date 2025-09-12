@@ -1,15 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Version>1.0.0</Version>
     <Authors>ResoniteModding</Authors>
     <TargetFramework>net9.0</TargetFramework>
-    <PackageProjectUrl>https://github.com/ResoniteModding/BepisResoniteHooks</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/ResoniteModding/BepisResoniteHooks</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/ResoniteModding/BepisResoniteWrapper</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ResoniteModding/BepisResoniteWrapper</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageId>ResoniteModding.BepisResoniteHooks</PackageId>
-    <Product>BepisResoniteHooks</Product>
-    <RootNamespace>BepisResoniteHooks</RootNamespace>
+    <PackageId>ResoniteModding.BepisResoniteWrapper</PackageId>
+    <Product>BepisResoniteWrapper</Product>
+    <RootNamespace>BepisResoniteWrapper</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Deterministic>true</Deterministic>
@@ -27,7 +27,6 @@
       https://nuget-modding.resonite.net/v3/index.json;
     </RestoreAdditionalProjectSources>
   </PropertyGroup>
-
   <!-- Modding dependencies -->
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
@@ -35,12 +34,10 @@
     <PackageReference Include="BepInEx.ResonitePluginInfoProps" Version="3.*" />
     <PackageReference Include="ResoniteModding.BepInExResoniteShim" Version="0.8.*" />
   </ItemGroup>
-
   <!-- NuGet fallback stripped game references -->
   <ItemGroup Condition="!Exists('$(GamePath)')">
     <PackageReference Include="Resonite.GameLibs" Version="2025.*" />
   </ItemGroup>
-
   <!-- Local game references -->
   <ItemGroup Condition="Exists('$(GamePath)')">
     <Reference Include="FrooxEngine">
@@ -56,18 +53,15 @@
       <Private>False</Private>
     </Reference>
   </ItemGroup>
-
   <!-- Post-build copy to game plugins folder -->
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <ItemGroup>
       <PluginFiles Include="$(TargetPath)" />
       <PluginFiles Include="$(TargetDir)$(TargetName).pdb" Condition="Exists('$(TargetDir)$(TargetName).pdb')" />
     </ItemGroup>
-    
     <Copy SourceFiles="@(PluginFiles)" DestinationFolder="$(PluginTargetDir)" Condition="'$(CopyToPlugins)' == 'true'" />
     <Message Text="Copied plugin files to $(PluginTargetDir)" Importance="high" Condition="'$(CopyToPlugins)' == 'true'" />
   </Target>
-
   <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>

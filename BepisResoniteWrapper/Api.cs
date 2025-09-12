@@ -1,4 +1,4 @@
-﻿namespace BepisResoniteHooks;
+﻿namespace BepisResoniteWrapper;
 
 static public class ResoniteHooks
 {

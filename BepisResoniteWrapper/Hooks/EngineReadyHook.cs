@@ -1,7 +1,7 @@
 using FrooxEngine;
 using HarmonyLib;
 
-namespace BepisResoniteHooks.Hooks;
+namespace BepisResoniteWrapper.Hooks;
 
 using static Plugin;
 using static ResoniteHooks;

@@ -1,11 +1,11 @@
-# BepisResoniteHooks
+# BepisResoniteWrapper
 [![Thunderstore Badge](https://modding.resonite.net/assets/available-on-thunderstore.svg)](https://thunderstore.io/c/resonite/)
 
 A [Resonite](https://resonite.com/) BepInEx library (not a standalone mod) that provides commonly-used hooks and events for other BepInEx mods. This library simplifies mod development by offering ready-to-use events like `OnEngineReady`.
 
 ## Installation (Manual)
 1. Install [BepisLoader](https://github.com/ResoniteModding/BepisLoader) for Resonite.
-2. Download the latest release ZIP file (e.g., `ResoniteModding-BepisResoniteHooks-1.0.0.zip`) from the [Releases](https://github.com/ResoniteModding/BepisResoniteHooks/releases) page.
+2. Download the latest release ZIP file (e.g., `ResoniteModding-BepisResoniteWrapper-1.0.0.zip`) from the [Releases](https://github.com/ResoniteModding/BepisResoniteWrapper/releases) page.
 3. Extract the ZIP and copy the `plugins` folder to your BepInEx folder in your Resonite installation directory:
    - **Default location:** `C:\Program Files (x86)\Steam\steamapps\common\Resonite\BepInEx\`
 4. Start the game. If you want to verify that the mod is working you can check your BepInEx logs.
@@ -15,20 +15,20 @@ A [Resonite](https://resonite.com/) BepInEx library (not a standalone mod) that 
 First, add the package reference to your mod's `.csproj` file:
 
 ```xml
-<PackageReference Include="ResoniteModding.BepisResoniteHooks" Version="1.0.*" />
+<PackageReference Include="ResoniteModding.BepisResoniteWrapper" Version="1.0.*" />
 ```
 
 Also add it as a dependency in your `thunderstore.toml`:
 
 ```toml
 [package.dependencies]
-ResoniteModding-BepisResoniteHooks = "1.0.0"
+ResoniteModding-BepisResoniteWrapper = "1.0.0"
 ```
 
 Then subscribe to the events you need in your mod:
 
 ```csharp
-using BepisResoniteHooks;
+using BepisResoniteWrapper;
 
 public class MyMod : BasePlugin
 {
