@@ -46,7 +46,7 @@ public class MyMod : BasePlugin
     {
         // The Resonite engine is now fully initialized
         // Safe to access FrooxEngine classes and functionality
-        Log.LogInfo("Engine is ready!");
+        Log.LogInfo("Engine is ready with version: " + Engine.Current.VersionString);
     }
 }
 ```
