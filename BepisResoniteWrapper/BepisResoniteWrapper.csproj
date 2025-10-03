@@ -32,7 +32,7 @@
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
     <PackageReference Include="BepInEx.NET.CoreCLR" Version="6.0.0-be.*" IncludeAssets="compile" />
     <PackageReference Include="BepInEx.ResonitePluginInfoProps" Version="3.*" />
-    <PackageReference Include="ResoniteModding.BepInExResoniteShim" Version="0.8.*" />
+    <PackageReference Include="ResoniteModding.BepInExResoniteShim" Version="0.9.*" />
   </ItemGroup>
   <!-- NuGet fallback stripped game references -->
   <ItemGroup Condition="!Exists('$(GamePath)')">
